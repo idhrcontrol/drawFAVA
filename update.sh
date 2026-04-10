@@ -41,6 +41,7 @@ then echo ""
 fi
 
 # Git pull the upstream; if the upstream doesn't exist, add it first.
+echo ""
 if git remote -vv | grep -q '^upstream'
 then echo "-------------------------------------------------------------------"
      echo "Git upstream already found."
@@ -50,18 +51,11 @@ else echo "-------------------------------------------------------------------"
 fi
 
 # Fetch from upstream.
+echo ""
 echo "-------------------------------------------------------------------"
 echo "Checking nbenlab/drawFAVA for updates..."
 git fetch upstream main
-# See if there's a difference there.
-updiff="`git diff --quiet HEAD upstream/main`"
-if [ "$updiff" -gt 0 ]
-then echo ""
-     echo "Updates found! Attempting to merge."
-     git merge --no-edit upstream/main
-else echo ""
-     echo "No updates found."
-fi
+git merge --no-edit upstream/main
 
 echo ""
 echo "-------------------------------------------------------------------"
